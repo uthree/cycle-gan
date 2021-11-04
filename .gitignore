@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+*.zip
+summer2winter_yosemite
+summer2winter_yosemite/*
