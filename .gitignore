@@ -130,3 +130,7 @@ dmypy.json
 *.zip
 summer2winter_yosemite
 summer2winter_yosemite/*
+checkpints/*
+*.jpg
+*.png
+*.pt

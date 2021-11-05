@@ -6,16 +6,13 @@ import torch.optim as optim
 from reversibleconvolution.reversible_convolution import *
 from remixer.remixer import *
 
-num_epochs = 500
-batch_size = 1
-
-class Image2Image(nn.Module):
+class Generator(nn.Module):
     """Some Information about Image2Image"""
     def __init__(self, input_channels=3, mid_channels=16, output_channels=3, num_layers=32):
-        super(Image2Image, self).__init__()
+        super(Generator, self).__init__()
         self.channel_conv1 = nn.Conv2d(input_channels, mid_channels, 3, padding=1)
         self.gelu1 = nn.GELU()
-        self.rev_conv = ReversibleConv2d(mid_channels, num_layers=num_layers)
+        self.rev_conv = ReversibleConvTranspose2d(mid_channels, num_layers=num_layers)
         self.gelu2 = nn.GELU()
         self.channel_conv2 = nn.Conv2d(mid_channels, output_channels, 3, padding=1)
         self.sigmoid = nn.Sigmoid()

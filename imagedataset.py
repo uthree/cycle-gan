@@ -20,5 +20,3 @@ class ImageDataset(torch.utils.data.Dataset):
 
     def __len__(self):
         return self.len
-
-ds = ImageDataset("./summer2winter_yosemite/testA/")
