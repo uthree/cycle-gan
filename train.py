@@ -6,7 +6,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from tqdm import tqdm
 
-from gan import *
+from gan_revunet import Generator, Discriminator
 from imagedataset import ImageDataset
 import cv2
 
@@ -29,8 +29,8 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Load Dataset
-    a_dataset = ImageDataset('./summer2winter_yosemite/trainA')
-    b_dataset = ImageDataset('./summer2winter_yosemite/trainB')
+    a_dataset = ImageDataset('./vangogh2photo/vangogh2photo/trainA/')
+    b_dataset = ImageDataset('./vangogh2photo/vangogh2photo/trainB/')
 
     a_dataloader = torch.utils.data.DataLoader(a_dataset, batch_size=batch_size, shuffle=True)
     b_dataloader = torch.utils.data.DataLoader(b_dataset, batch_size=batch_size, shuffle=True)
@@ -89,7 +89,8 @@ def main():
 
             d_loss.backward()
             optimizer.step()
-
+            bar.set_description(f'Epoch: {epoch}, d_loss: {d_loss.item()} g_loss: {g_loss.item()}')
+            bar.update(0)
             if i % 10 == 0:
                 # save to image
                 cv2.imwrite('./results/fake_a2b_{}.png'.format(epoch), fake_a2b[0].detach().cpu().numpy().transpose(1,2,0)*255)
@@ -99,7 +100,7 @@ def main():
         bar.set_description(f'Epoch: {epoch}, d_loss: {d_loss.item()} g_loss: {g_loss.item()}')
         bar.update(1)
         torch.save(model, model_path)
-        if epoch % 10 == 0:
+        if epoch % 2 == 0:
             torch.save(model, './checkpoints/model_{}.pt'.format(epoch))
         print('Model saved!')
 
