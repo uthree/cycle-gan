@@ -29,8 +29,8 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Load Dataset
-    a_dataset = ImageDataset('./vangogh2photo/vangogh2photo/trainA/')
-    b_dataset = ImageDataset('./vangogh2photo/vangogh2photo/trainB/')
+    a_dataset = ImageDataset('./vangogh2photo/trainA/')
+    b_dataset = ImageDataset('./vangogh2photo/trainB/')
 
     a_dataloader = torch.utils.data.DataLoader(a_dataset, batch_size=batch_size, shuffle=True)
     b_dataloader = torch.utils.data.DataLoader(b_dataset, batch_size=batch_size, shuffle=True)

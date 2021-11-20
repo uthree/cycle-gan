@@ -29,8 +29,8 @@ def main():
     device = torch.device('cpu')
 
     # Load Dataset
-    a_dataset = ImageDataset('./vangogh2photo/vangogh2photo/testA/')
-    b_dataset = ImageDataset('./vangogh2photo/vangogh2photo/testB/')
+    a_dataset = ImageDataset('./vangogh2photo/testA/')
+    b_dataset = ImageDataset('./vangogh2photo/testB/')
     #a_dataset = ImageDataset('./summer2winter_yosemite/testA/')
     #b_dataset = ImageDataset('./summer2winter_yosemite/testB/')
 
